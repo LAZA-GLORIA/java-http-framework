@@ -25,8 +25,14 @@ public class HttpServer {
             );
 
             // On lit la première ligne de la requete
-            String requestLine = reader.readLine();
-            System.out.println("Requête reçue : " + requestLine);
+            // String requestLine = reader.readLine();
+            // System.out.println("Requête reçue : " + requestLine);
+
+            // On ne lit plus la première ligne de la requete --> On délègue le parsing à HttpRequest
+            HttpRequest request = new HttpRequest(reader);
+            System.out.println("Méthode : " + request.getMethod());
+            System.out.println("Path : " + request.getPath());
+            System.out.println("Headers : " + request.getHeaders());
 
             // On construit la réponse HTTP :
             //    - ligne de statut (HTTP/1.1 200 OK)
@@ -34,7 +40,7 @@ public class HttpServer {
             //    - ligne vide (\r\n)
             //    - body (le contenu)
 
-            String body = "Hello I'm a framwork!";
+            String body = "Hello I'm a framework!";
 
             String response =
                     "HTTP/1.1 200 OK\r\n" +                    // statut
