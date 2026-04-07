@@ -40,19 +40,26 @@ public class HttpServer {
             //    - ligne vide (\r\n)
             //    - body (le contenu)
 
-            String body = "Hello I'm a framework!";
+            // String body = "Hello I'm a framework!";
+            HttpResponse response;
 
-            String response =
-                    "HTTP/1.1 200 OK\r\n" +                    // statut
-                            "Content-Type: text/plain\r\n" +            // type de contenu
-                            "Content-Length: " + body.length() + "\r\n" + // taille du body
-                            "\r\n" +                                     // ligne vide = fin des headers
-                            body;
+            // String response =
+            //        "HTTP/1.1 200 OK\r\n" +                    // statut
+            //                "Content-Type: text/plain\r\n" +            // type de contenu
+            //                "Content-Length: " + body.length() + "\r\n" + // taille du body
+            //                "\r\n" +                                     // ligne vide = fin des headers
+            //                body;
+
+            if (request.getPath().equals("/users")) {
+                response = HttpResponse.ok("Liste des utilisateurs");
+            } else {
+                response = HttpResponse.notFound(("Route non trouvée"));
+            }
 
             // On envoie la réponse au client
             // OutputStream est le tuyau de sortie vers le navigateur
             OutputStream output = clientSocket.getOutputStream();
-            output.write(response.getBytes());
+            output.write(response.toBytes());
             output.flush();
 
             // On ferme la connexion avec ce client, la réponse reçue

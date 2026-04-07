@@ -1,0 +1,26 @@
+# IntelliJ IDEA
+.idea/
+
+# Fichiers compilés
+*.class
+
+# Dossier de compilation
+out/
+target/
+build/
+
+# Logs
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires
+*.tmp
+*.swp
+
+# Archives éventuelles
+*.jar
+*.war
+*.ear
